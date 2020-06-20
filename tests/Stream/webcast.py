@@ -44,7 +44,7 @@ def detect_motion(frameCount):
         # convert the frame to grayscale, and blur it
         total+=1
         frame = vs.read()
-        frame = imutils.rotate(frame,180)
+        # frame = imutils.rotate(frame,180)
         frame = imutils.resize(frame, width=800)
    
         if(total==(frameCount*5)):

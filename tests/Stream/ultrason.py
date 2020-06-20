@@ -7,8 +7,8 @@ def getDistance():
     print("Init GIO")
     GPIO.setmode(GPIO.BOARD)
 
-    TRIG = 16
-    ECHO = 18
+    TRIG = 13
+    ECHO = 15
 
     print ("Test en cours")
 
