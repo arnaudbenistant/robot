@@ -2,6 +2,7 @@
 import asyncio
 import time
 import servo
+import controlerfid
 from threading import Thread, RLock
 from evdev import InputDevice, categorize, ecodes
 
@@ -10,6 +11,7 @@ BTN_UPDOWN = 17
 BTN_UPDOWN_UP = -1
 BTN_UPDOWN_RELEASED = 0
 BTN_UPDOWN_DOWN = 1
+BTN_HOME = 317
 
 BTN_LR = 16
 BTN_LR_L = -1
@@ -21,6 +23,9 @@ AVANT = -1
 ARRIERE = 1
 ARRET = 0
 DIRECTION = 0
+
+#Is user allow to drive the car
+AUTHORIZED = False
 
 #Define Bluetooth Settings ####
 joycon = InputDevice('/dev/input/event5')
@@ -71,21 +76,23 @@ async def helper(dev):
 # Launch main program of my robot :)        
 try:
     # Start RFID Management
-    # TODO
-
+    while(not AUTHORIZED):
+        AUTHORIZED = controlerfid.isAuthenticate()
+    
+    print("Authorise ?"+str(AUTHORIZED))
     # Start display Management
     # TODO
 
     # Start Motors management
-        servo.guidageStart() 
+    servo.guidageStart() 
 
     # Start Video Management
     # TODO
  
     # Launch Thread to capture joycon events 
-        loop = asyncio.get_event_loop()
+    loop = asyncio.get_event_loop()
 
     # Capture events from the joycon 
-        loop.run_until_complete(helper(joycon))
+    loop.run_until_complete(helper(joycon))
 except KeyboardInterrupt:
     exitbl()
