@@ -50,10 +50,10 @@ async def helper(dev):
                 
         if(ev.code == BTN_LR):
             if(ev.value == BTN_LR_L):
-                if (DIRECTION == AVANT):
-                    servo.tournerGauche()
-                else:
+                if (DIRECTION == ARRIERE):
                     servo.tournerDroite()
+                else:
+                    servo.tournerGauche()
             if(ev.value == BTN_LR_RELEASED):
                 if (DIRECTION == AVANT):
                     servo.avancer()
@@ -62,30 +62,30 @@ async def helper(dev):
                 else:
                     servo.stop() 
             if(ev.value == BTN_LR_R):
-                if (DIRECTION == AVANT):
-                    servo.tournerDroite()
-                else:
+                if (DIRECTION == ARRIERE):
                     servo.tournerGauche()
+                else:
+                    servo.tournerDroite()
 
 
 # Launch main program of my robot :)        
 try:
-	# Start RFID Management
-	# TODO
+    # Start RFID Management
+    # TODO
 
-	# Start display Management
-	# TODO
+    # Start display Management
+    # TODO
 
-	# Start Motors management
-    	servo.guidageStart() 
+    # Start Motors management
+        servo.guidageStart() 
 
-  	# Start Video Management
-	# TODO
+    # Start Video Management
+    # TODO
  
-	# Launch Thread to capture joycon events 
-	loop = asyncio.get_event_loop()
+    # Launch Thread to capture joycon events 
+        loop = asyncio.get_event_loop()
 
-  	# Capture events from the joycon 
-	loop.run_until_complete(helper(joycon))
+    # Capture events from the joycon 
+        loop.run_until_complete(helper(joycon))
 except KeyboardInterrupt:
     exitbl()
